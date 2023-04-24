@@ -26,7 +26,7 @@ model._fc = nn.Linear(model._fc.in_features, num_classes)
 checkpoint = torch.load('../ai/model/150model.pt', map_location=torch.device('cpu'))
 model.load_state_dict(checkpoint['model_state_dict'])
 
-transform=transforms.Compose([
+transform = transforms.Compose([
     transforms.RandomResizedCrop(224),
     transforms.RandomHorizontalFlip(),
     transforms.ToTensor(),
@@ -35,8 +35,9 @@ transform=transforms.Compose([
 
 classes = os.listdir('../ai/data')
 
+
 @service_router.post("/pred", status_code=status.HTTP_200_OK)
-async def predict_image(image : UploadFile = File(...)):
+async def predict_image(image: UploadFile = File(...)):
     contents = await image.read()
     image = Image.open(io.BytesIO(contents)).convert('RGB')
     image = transform(image)

@@ -3,3 +3,10 @@ ai/data
 *.pyc
 __pycache__/
 DS_Store
+faceswap/checkpoints/
+faceswap/data/
+faceswap/results/
+faceswap/__pycache__/
+faceswap/.DS_Store
+faceswap/*.tar
+faceswap/*.zip
