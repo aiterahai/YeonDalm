@@ -45,4 +45,5 @@ async def predict_image(image : UploadFile = File(...)):
     with torch.no_grad():
         output = model(image)
         _, predicted = torch.topk(output, k=3, dim=1)
+
     return [classes[i] for i in predicted[0]]

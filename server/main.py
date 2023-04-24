@@ -8,22 +8,36 @@ github: https://github.com/terra2007
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from faceswap.main import router
 import uvicorn
 from server.app import api_router
 
-app = FastAPI()
 
-origins = ["http://localhost"]
+def create_app():
+    app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+    include_router(app)
+    add_cors_middleware(app)
 
-app.include_router(api_router)
+
+def include_router(app: FastAPI):
+    app.include_router(api_router)
+    app.include_router(router)
+
+
+def add_cors_middleware(app: FastAPI):
+    origins = ["http://localhost"]
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+
+app = create_app()
 
 if __name__ == '__main__':
     uvicorn.run("main:app", reload=True)
