@@ -15,9 +15,9 @@ from server.app import api_router
 
 def create_app():
     app = FastAPI()
-
     include_router(app)
     add_cors_middleware(app)
+    return app
 
 
 def include_router(app: FastAPI):
@@ -26,11 +26,9 @@ def include_router(app: FastAPI):
 
 
 def add_cors_middleware(app: FastAPI):
-    origins = ["http://localhost"]
-
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=origins,
+        allow_origins=["*"],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
