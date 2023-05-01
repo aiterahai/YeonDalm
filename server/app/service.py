@@ -8,7 +8,7 @@ github: https://github.com/terra2007
 """
 import io
 
-from fastapi import APIRouter, status, UploadFile
+from fastapi import APIRouter, UploadFile
 from fastapi.param_functions import File
 import torch
 import torch.nn as nn
