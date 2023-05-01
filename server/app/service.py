@@ -19,7 +19,7 @@ from PIL import Image
 
 service_router = APIRouter()
 
-model = EfficientNet.from_pretrained('efficientnet-b0')
+model = EfficientNet.from_name('efficientnet-b0')
 num_classes = len(os.listdir('../ai/data'))
 model._fc = nn.Linear(model._fc.in_features, num_classes)
 
