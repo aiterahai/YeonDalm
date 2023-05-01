@@ -23,7 +23,7 @@ model = EfficientNet.from_name('efficientnet-b0')
 num_classes = len(os.listdir('../ai/data'))
 model._fc = nn.Linear(model._fc.in_features, num_classes)
 
-checkpoint = torch.load('../ai/model/150model.pt', map_location=torch.device('cpu'))
+checkpoint = torch.load('../ai/model/best_model.pt', map_location=torch.device('cpu'))
 model.load_state_dict(checkpoint['model_state_dict'])
 
 transform = transforms.Compose([
