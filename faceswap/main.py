@@ -13,9 +13,20 @@ from fastapi import APIRouter, UploadFile, File, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 import uvicorn
+from shutil import copyfile
 
 base = os.path.dirname(os.path.abspath(__file__))
 
+parser = argparse.ArgumentParser(description="FastFake Test")
+parser.add_argument('--source_img_path', type=str, default=base + '/data/source.png')
+parser.add_argument('--target_img_path', type=str, default=base + '/data/target.png')
+parser.add_argument('--output_dir', type=str, default=base + '/results')
+parser.add_argument('--image_size', type=int, default=224)
+parser.add_argument('--merge_result', type=bool, default=True)
+parser.add_argument('--need_align', type=bool, default=True)
+parser.add_argument('--use_gpu', type=bool, default=False)
+
+args = parser.parse_args()
 
 def get_id_emb(id_net, id_img_path):
     id_img = cv2.imread(id_img_path)
@@ -72,7 +83,6 @@ def image_test(args):
 
 
 def face_align(landmarkModel, image_path, merge_result=False, image_size=224):
-    print(image_path)
     if os.path.isfile(image_path):
         img_list = [image_path]
     else:
@@ -91,16 +101,6 @@ def face_align(landmarkModel, image_path, merge_result=False, image_size=224):
 
 
 def foo():
-    parser = argparse.ArgumentParser(description="FastFake Test")
-    parser.add_argument('--source_img_path', type=str, default=base + '/data/source.png')
-    parser.add_argument('--target_img_path', type=str, default=base + '/data/target.png')
-    parser.add_argument('--output_dir', type=str, default=base + '/results')
-    parser.add_argument('--image_size', type=int, default=224)
-    parser.add_argument('--merge_result', type=bool, default=True)
-    parser.add_argument('--need_align', type=bool, default=True)
-    parser.add_argument('--use_gpu', type=bool, default=False)
-
-    args = parser.parse_args()
     if args.need_align:
         landmarkModel = LandmarkModel(name='landmarks')
         landmarkModel.prepare(ctx_id=0, det_thresh=0.6, det_size=(640, 640))
@@ -123,12 +123,14 @@ app.add_middleware(
 router = APIRouter()
 
 
-@router.post("/image")
-def image(source: UploadFile = File(...), target: UploadFile = File(...)):
-    location = [base + "/data/source.png", base + "/data/target.png"]
-    for file_location, uploaded_file in zip(location, [source, target]):
-        with open(file_location, "wb+") as file_object:
-            file_object.write(uploaded_file.file.read())
+@router.post("/image/{source}")
+def image(source : str, target: UploadFile = File(...)):
+    location = base + "/data/target.png"
+    source_location = "D:/YeonDalm/ai/data/" + source + "/image0.jpg"
+    copyfile(source_location, base + "/data/source.png")
+    with open(location, "wb+") as file_object:
+        file_object.write(target.file.read())
+
     foo()
     return FileResponse(base + "/results/target.png")
 

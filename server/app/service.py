@@ -36,7 +36,7 @@ transform = transforms.Compose([
 classes = os.listdir('../ai/data')
 
 
-@service_router.post("/pred", status_code=status.HTTP_200_OK)
+@service_router.post("/pred")
 async def predict_image(image: UploadFile = File(...)):
     contents = await image.read()
     image = Image.open(io.BytesIO(contents)).convert('RGB')
@@ -45,6 +45,6 @@ async def predict_image(image: UploadFile = File(...)):
 
     with torch.no_grad():
         output = model(image)
-        _, predicted = torch.topk(output, k=3, dim=1)
+        top3_probs, top3_idxs = torch.topk(output, k=3, dim=1)
 
-    return [classes[i] for i in predicted[0]]
+    return [classes[i] for i in top3_idxs[0]]

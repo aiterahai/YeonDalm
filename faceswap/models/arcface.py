@@ -126,5 +126,3 @@ if __name__ == '__main__':
     id_net = ResNet(block=IRBlock, layers=[3, 4, 23, 3])
     id_net.eval()
     id_emb, id_feature_map = id_net(paddle.randn((1, 3, 112, 112)))
-    print(id_emb.shape)
-    print(id_feature_map.shape)

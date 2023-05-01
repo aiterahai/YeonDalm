@@ -17,10 +17,8 @@ class LandmarkModel():
                 continue
             model = model_zoo.get_model(onnx_file)
             if model.taskname not in self.models:
-                print('find model:', onnx_file, model.taskname)
                 self.models[model.taskname] = model
             else:
-                print('duplicated model task type, ignore:', onnx_file, model.taskname)
                 del model
         assert 'detection' in self.models
         self.det_model = self.models['detection']
@@ -29,7 +27,6 @@ class LandmarkModel():
         self.det_thresh = det_thresh
         self.mode = mode
         assert det_size is not None
-        print('set det-size:', det_size)
         self.det_size = det_size
         for taskname, model in self.models.items():
             if taskname == 'detection':
