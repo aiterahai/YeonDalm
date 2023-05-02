@@ -1,0 +1,102 @@
+header {
+  background-color: #4c4c4c;
+  color: #fff;
+  padding: 1px;
+  text-align: center;
+}
+
+body {
+  font-family: 'Noto Sans KR', 'Thin';
+  background-color: #f1f1f1;
+  margin: 0;
+}
+
+#dropzone {
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto 20px;
+  width: 500px;
+  height: 30px;
+  background-color: #fff;
+}
+
+#result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  margin-top: 20px;
+}
+
+#imagediv {
+  margin: 20px auto;
+  max-width: 500px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+label {
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+label:hover {
+  background-color: #3e8e41;
+}
+
+input[type="file"]:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+  display: block;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#download-btn {
+  display: block;
+  margin: 20px auto;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  width: 200px;
+}
+
+#download-btn:hover {
+  background-color: #3e8e41;
+}
+
+#refresh-btn {
+  border: none;
+  border-radius: 50%;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 24px;
+  padding: 12px 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 20px;
+}
+
+#refresh-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
