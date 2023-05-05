@@ -20,7 +20,7 @@ body {
   align-items: center;
   margin: 50px auto 20px;
   width: 500px;
-  height: 30px;
+  height: 50px;
   background-color: #fff;
 }
 
@@ -33,9 +33,27 @@ body {
 }
 
 #imagediv {
-  margin: 20px auto;
-  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
+
+#imagediv img {
+  max-width: 500px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-out;
+  object-fit: cover;
+}
+
+#imagediv img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
 
 input[type="file"] {
   display: none;
