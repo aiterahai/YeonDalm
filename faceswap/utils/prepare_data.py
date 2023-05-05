@@ -7,7 +7,7 @@ from insightface.model_zoo import model_zoo
 
 
 class LandmarkModel():
-    def __init__(self, name, root='D:/YeonDalm/faceswap/checkpoints'):
+    def __init__(self, name, root='C:/YeonDalm/faceswap/checkpoints'):
         self.models = {}
         root = os.path.expanduser(root)
         onnx_files = glob.glob(osp.join(root, name, '*.onnx'))

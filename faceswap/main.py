@@ -126,7 +126,7 @@ router = APIRouter()
 @router.post("/image/{source}")
 def image(source : str, target: UploadFile = File(...)):
     location = base + "/data/target.png"
-    source_location = "D:/YeonDalm/ai/data/" + source + "/image0.jpg"
+    source_location = "C:/YeonDalm/ai/data/" + source + "/image0.jpg"
     copyfile(source_location, base + "/data/source.png")
     with open(location, "wb+") as file_object:
         file_object.write(target.file.read())
