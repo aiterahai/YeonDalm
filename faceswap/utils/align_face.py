@@ -1,5 +1,7 @@
 import numpy as np
 import cv2
+from warnings import filterwarnings
+filterwarnings(action='ignore')
 
 
 def align_with_five_points(src_points, size=224):

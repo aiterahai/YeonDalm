@@ -14,6 +14,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 import uvicorn
 from shutil import copyfile
+import requests
+from bs4 import BeautifulSoup
 
 base = os.path.dirname(os.path.abspath(__file__))
 
@@ -134,6 +136,9 @@ def image(source : str, target: UploadFile = File(...)):
     foo()
     return FileResponse(base + "/results/target.png")
 
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                  'Chrome/58.0.3029.110 Safari/537.3'}
 
 app.include_router(router)
 

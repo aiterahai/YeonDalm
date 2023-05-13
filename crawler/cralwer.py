@@ -105,6 +105,7 @@ search_words = ['트와이스 나연',
                 ]
 
 
+
 def download_image(query, url, i):
     response = requests.get(url, headers=headers)
     path = base_path + query + '/image{}.jpg'.format(i)

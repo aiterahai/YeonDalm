@@ -8,6 +8,7 @@ dropzone.style.height = "439px"
 
 function showGeneratingMessage() {
   const generatingMessage = document.createElement("p");
+  generatingMessage.style.marginTop = "100px"
   generatingMessage.style.textAlign = "center"
   imageDiv.appendChild(generatingMessage);
 
